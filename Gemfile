@@ -25,3 +25,4 @@ group :doc do
 end
 
 gem 'devise'
+gem 'pundit'
