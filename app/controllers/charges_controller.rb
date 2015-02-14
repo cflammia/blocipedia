@@ -18,6 +18,9 @@ class ChargesController < ApplicationController
       currency: 'usd'
     )
 
+    current_user.account_type = 'premium'
+    current_user.save
+
     flash[:success] = "Thank you for the upgrade, #{current_user.email}! We thank you for your business."
     redirect_to new_charge_path # or wherever
 
