@@ -12,3 +12,7 @@
     </div>
   </div>
 <% end %>
+
+<% if policy(Wiki).edit? %>
+<%= link_to "Edit Wiki", edit_wiki_path(@wiki), class: 'btn btn-success' %>
+<% end %>
