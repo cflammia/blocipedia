@@ -1,18 +1,14 @@
-<h1>Wikis</h1>
+<h2 class="align-center">My Wikis</h2>
 <% if policy(Wiki.new).create? %>
 <%= link_to "Create New Wiki", new_wiki_path(@wiki), class: 'btn btn-success' %>
 <% end %>
 
-<% @wikis.each do |wiki| %>
-  <div class="media">
-    <div class="media-body">
-      <h4 class="media-heading">
-        <%= link_to wiki.title, wiki %>
-      </h4>
-    </div>
-  </div>
+<div class="col-md-8" align="center">
+  <table class= "table table-striped">
+    <% @wikis.each do |wiki| %>
+    <tr>
+      <td><%= link_to wiki.title, wiki %></td>
+    </tr>
 <% end %>
-
-<% if policy(Wiki).edit? %>
-<%= link_to "Edit Wiki", edit_wiki_path(@wiki), class: 'btn btn-success' %>
-<% end %>
+</table>
+</div>
