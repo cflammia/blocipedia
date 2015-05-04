@@ -12,7 +12,7 @@ class ChargesController < ApplicationController
 
     # Where the real magic happens
     charge = Stripe::Charge.create(
-      customer: customer.id, # Note -- this is NOT the user_id in your app
+      customer: customer.id, #this is NOT the user_id
       amount: @amount,
       description: "Premium Membership - #{current_user.email}",
       currency: 'usd'
@@ -22,7 +22,7 @@ class ChargesController < ApplicationController
     current_user.save
 
     flash[:success] = "Thank you for the upgrade, #{current_user.email}! We thank you for your business."
-    redirect_to new_charge_path # or wherever
+    redirect_to new_charge_path 
 
     # Stripe will send back CardErrors, with friendly messages
     # when something goes wrong.
