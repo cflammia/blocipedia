@@ -4,4 +4,7 @@ class CollaboratorPolicy < ApplicationPolicy
     true
   end
 
-end
+  def new
+    @wiki = Wiki.new
+      authorize @wiki
+  end

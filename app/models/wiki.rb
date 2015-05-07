@@ -1,7 +1,7 @@
 class Wiki < ActiveRecord::Base
   belongs_to :user
-  has_many :collaborators
-  has_many :users, through: :collaborators
+  has_many :collaborators, dependent: :destroy
+  belongs_to :user
 
   def is_collaborator?(user)
     users.include? user

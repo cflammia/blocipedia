@@ -1,6 +1,6 @@
 class WikisController < ApplicationController
   def index
-    @wikis = Wiki.visible_to(current_user)
+    @wikis = Wiki.all
     authorize @wikis
   end
 
@@ -15,13 +15,13 @@ class WikisController < ApplicationController
   end
 
   def create
-    @wiki = Wiki.new(params.require(:wiki).permit(:title, :body))
+    @wiki = current_user.wikis.build(params.require(:wiki).permit(:title, :body))
     authorize @wiki
     if @wiki.save
-      flash[:notice] = "Wiki saved successfully."
+      flash[:notice] = "Your wiki was saved."
       redirect_to @wiki
     else
-      flash[:error] = "There was an error saving the wiki. Please try again."
+      flash[:error] = "There was an error saving your wiki. Please try again."
       render :new
     end
   end
@@ -35,10 +35,10 @@ class WikisController < ApplicationController
     @wiki = Wiki.find(params[:id])
     authorize @wiki
     if @wiki.update_attributes(params.require(:wiki).permit(:title, :body))
-      flash[:notice] = "Wiki updated successfully."
+      flash[:notice] = "Your wiki was updated."
       redirect_to @wiki
     else
-      flash[:error] = "There was an error saving the wiki. Please try again."
+      flash[:error] = "There was an error saving your wiki. Please try again."
       render :edit
     end
   end
